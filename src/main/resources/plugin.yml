@@ -1,0 +1,12 @@
+name: Simplegodmode
+version: '${project.version}'
+main: com.guedosha.simplegodmode.Simplegodmode
+api-version: 1.19
+authors: [ Guedosha ]
+description: A simple godmode plugin
+website: guedosha.com
+commands:
+  god:
+    description: Makes you invincible
+    usage: /<command> (target)
+    aliases: [godmode]
