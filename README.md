@@ -1,2 +1,4 @@
 # Simple-God-Mode
-Adds a simple god mode command to make you a deity
+Adds a godmode command to make you invincible
+
+Usage: /godmode or /godmode < target >
