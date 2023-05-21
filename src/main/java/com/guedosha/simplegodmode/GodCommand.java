@@ -15,6 +15,11 @@ public class GodCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player p) {
+            if (!p.hasPermission("Simplegodmode.godmode")){
+                p.sendMessage(ChatColor.RED + "You don't have permission to use that command");
+                return true;
+            }
+
             if (args.length == 0) {
                 toggleGod(null, p);
             } else if (args.length == 1) {
