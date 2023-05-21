@@ -11,8 +11,6 @@ public final class Simplegodmode extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         getCommand("god").setExecutor( new GodCommand());
-        getConfig().options().copyDefaults();
-        saveDefaultConfig();
         plugin = this;
     }
 
