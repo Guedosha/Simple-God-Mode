@@ -2,6 +2,7 @@ package com.guedosha.simplegodmode;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,6 +19,7 @@ public class GodCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Configuration config = new ReloadHandler().getConfig();
+
         if (sender instanceof Player p) {
             if (!p.hasPermission("simplegodmode.use")) { p.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.no-permission").replace("%caster%", p.getName()).replace("%target%", ""))); return true; }
             if (args.length == 0) {
@@ -47,18 +49,21 @@ public class GodCommand implements CommandExecutor {
 
     public void toggleGod (Player caster, Player target) {
         Configuration config = new ReloadHandler().getConfig();
+
         String targetEnabled = ChatColor.translateAlternateColorCodes( '&',config.getString("messages.target-enabled")).replace("%target%", target.getName()).replace("%caster%", caster.getName());
         String casterEnabled = ChatColor.translateAlternateColorCodes('&', config.getString("messages.caster-enabled")).replace("%target%", target.getName()).replace("%caster%", caster.getName());
         String targetDisabled = ChatColor.translateAlternateColorCodes('&', config.getString("messages.target-disabled")).replace("%target%", target.getName()).replace("%caster%", caster.getName());
         String casterDisabled = ChatColor.translateAlternateColorCodes('&', config.getString("messages.caster-disabled")).replace("%target%", target.getName()).replace("%caster%", caster.getName());
+
         if (target.isInvulnerable()) {
             target.setInvulnerable(false);
             target.sendMessage(targetDisabled);
+
             if (!caster.getName().equals(target.getName())) caster.sendMessage(casterDisabled);
         } else {
             target.setInvulnerable(true);
             if (config.getBoolean("feed-on-godmode")) target.setFoodLevel(20);
-            if (config.getBoolean("heal-on-godmode")) target.setHealth(target.getMaxHealth());
+            if (config.getBoolean("heal-on-godmode")) target.setHealth(target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
             int sat = config.getInt("saturation-amount");
             if (sat >= 1 && sat <= 20) {
                 target.setSaturation(sat);
@@ -70,6 +75,7 @@ public class GodCommand implements CommandExecutor {
 
     public void toggleGod (Player target, boolean consoleSender) {
         Configuration config = new ReloadHandler().getConfig();
+
         if (consoleSender) {
             String targetEnabled = ChatColor.translateAlternateColorCodes( '&',config.getString("messages.target-enabled")).replace("%target%", target.getName()).replace("%caster%", "Console");
             String casterEnabled = ChatColor.translateAlternateColorCodes('&', config.getString("messages.caster-enabled")).replace("%target%", target.getName()).replace("%caster%", "Console");
@@ -82,7 +88,7 @@ public class GodCommand implements CommandExecutor {
             } else {
                 target.setInvulnerable(true);
                 if (config.getBoolean("feed-on-godmode")) target.setFoodLevel(20);
-                if (config.getBoolean("heal-on-godmode")) target.setHealth(target.getMaxHealth());
+                if (config.getBoolean("heal-on-godmode")) target.setHealth(target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
                 if (config.getInt("saturation-amount") >= 1 && config.getInt("saturation-amount") <= 20) {
                     target.setSaturation(config.getInt("saturation-amount"));
                 }
@@ -98,7 +104,7 @@ public class GodCommand implements CommandExecutor {
             } else {
                 target.setInvulnerable(true);
                 if (config.getBoolean("feed-on-godmode")) target.setFoodLevel(20);
-                if (config.getBoolean("heal-on-godmode")) target.setHealth(target.getMaxHealth());
+                if (config.getBoolean("heal-on-godmode")) target.setHealth(target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
                 if (config.getInt("saturation-amount") >= 1 && config.getInt("saturation-amount") <= 20) {
                     target.setSaturation(config.getInt("saturation-amount"));
                 }

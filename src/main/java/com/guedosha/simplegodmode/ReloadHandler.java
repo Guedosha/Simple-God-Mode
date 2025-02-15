@@ -9,7 +9,6 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class ReloadHandler implements CommandExecutor {
 
@@ -18,6 +17,7 @@ public class ReloadHandler implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         String reloaded = ChatColor.translateAlternateColorCodes('&', "&a[SimpleGodMode] &fSuccessfully Reloaded Config");
+
         if (sender instanceof Player p) {
             if (!p.hasPermission("simplegodmode.reload")) {
                 p.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("messages.no-permission").replace("%target%", p.getName()).replace("%caster", p.getName())));
