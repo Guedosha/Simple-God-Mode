@@ -1,4 +1,4 @@
-# Simple-God-Mode
+# Simple God Mode
 A simple yet highly configurable plugin to give you god mode.
 
 Usage: <code>/god &lt;playername&gt;</code> or <code>/god</code> to use the command on yourself
