@@ -1,5 +1,5 @@
 name: Simplegodmode
-version: '1.0'
+version: '${project.version}'
 main: com.guedosha.simplegodmode.Simplegodmode
 api-version: 1.16
 authors: [ Guedosha ]
@@ -10,5 +10,8 @@ commands:
     description: Makes you invincible
     usage: /<command> (target)
     aliases: [godmode]
+    permission: simplegodmode.use
   reload:
     description: Reloads the plugin config
+    usage: /simplegodmode:reload
+    permission: simplegodmode.reload
